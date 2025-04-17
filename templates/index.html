@@ -1,14 +1,27 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'output.css' %}">
   <title>Belajar Django Dynamic Route</title>
 </head>
 <body>
-  <h1>My Todos</h1>
-  {% for todo in todos %}
-  <a href="{% url 'detail-view' todo.id %}">{{ todo.title }}</a>
-  {% endfor %}
+  <h1>My Todos!</h1>
+  <div>
+    {% for todo in todos %}
+    <a href="{% url 'detail-view' todo.id %}">{{ todo.title }}</a>
+    {% endfor %}
+  </div>
+  <form method="post">
+    {% csrf_token %}
+    <input type="text" name="title" placeholder="Input Title" required>
+    <textarea name="content" placeholder="Input Content" required></textarea>
+    <button>Create Todo</button>
+    {% for messages in messages %}
+      <div>{{ messages }}</div>
+    {% endfor %}
+  </form>
 </body>
 </html>

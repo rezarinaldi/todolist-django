@@ -8,5 +8,11 @@
 <body>
   <h3>{{ todo.title }}</h3>
   <p>{{ todo.content }}</p>
+  <a href="{% url 'update' todo.id %}">Edit</a>
+
+  <form method="post" action="{% url 'delete' todo.id %}">
+    {% csrf_token %}
+    <button>Delete</button>
+  </form>
 </body>
 </html>
